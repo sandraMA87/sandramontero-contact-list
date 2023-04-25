@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import { addContact } from "./addContact";
 
 export const Home = () => {
 
@@ -18,7 +19,7 @@ export const Home = () => {
 	return (
 	
 	<div className="container">
-		<h2>MI LISTA DE CONTACTOS</h2>
+		<h4>MI LISTA DE CONTACTOS</h4>
 		<div className="row">
 			{contactos.map((contact, index) => (
 				<div key={index} className="col-md-4">
