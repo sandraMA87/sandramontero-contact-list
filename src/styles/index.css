@@ -11,6 +11,8 @@ body {
 
 .navbar-title {
     color: white;
+    margin-left: 5px;
+    text-decoration: none;
 }
 img {
     width: 100px;
