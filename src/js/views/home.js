@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
-import { addContact } from "./addContact";
+
 
 export const Home = () => {
 

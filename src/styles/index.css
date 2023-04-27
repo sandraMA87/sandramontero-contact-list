@@ -52,6 +52,20 @@ img {
     background-color: rgb(217, 6, 6);
     width: 100px;
     cursor: pointer;
-    
-  
+}
+
+.form-container {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: aliceblue;
+    width: 630px;
+    height: 350px;
+
+}
+
+input {
+    width: 500px;
+    height: 40px;
+    border-radius: 10px;
 }
