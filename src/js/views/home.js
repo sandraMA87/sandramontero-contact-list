@@ -6,6 +6,8 @@ import "../../styles/home.css";
 export const Home = () => {
 
 	const [contactos, setContactos] = useState([]);
+	const [editing, setEditing] = useState(false);
+    const [contactoEditando, setContactoEditando] = useState({});
 
 	useEffect(()=> {
 		fetch("https://assets.breatheco.de/apis/fake/contact/agenda/agenda-sandra")
@@ -14,6 +16,23 @@ export const Home = () => {
 		.catch((error) => console.log(error));
 
 	}, []);
+
+	const handleDeleteContact = (id) => {
+		fetch(`https://assets.breatheco.de/apis/fake/contact/${id}`, {
+		  method: "DELETE",
+		})
+		  .then((response) => response.json())
+		  .then(() => {
+			const updatedContacts = contactos.filter(
+			  (contact) => contact.id !== id
+			);
+			setContactos(updatedContacts);
+		  })
+		  .catch((error) => console.log(error));
+	  };
+
+	  
+	
 	
 	
 	return (
@@ -25,6 +44,7 @@ export const Home = () => {
 				<div key={index} className="col-md-4">
 					<div className="card mt-3">
 					<div className="card-body">
+					
 						<h4 className="card-title"> {contact.full_name}</h4>
 						<p className="card-text">
 							<i className="fas fa-map-marker-alt"></i> {contact.address}
@@ -38,7 +58,7 @@ export const Home = () => {
 						<div className="h4 mb-4 p-2 text-danger border-bottom border-danger mt-2"></div>
 						<div className="button-container">
 						<button className="btn1"><i className="fas fa-pencil-alt"></i></button>
-						<button className="btn2"><i className="fas fa-trash-alt"></i></button>
+						<button className="btn2" onClick={() => handleDeleteContact(contact.id)}><i className="fas fa-trash-alt"></i></button>
 						</div>
                       </div>
 					</div>
