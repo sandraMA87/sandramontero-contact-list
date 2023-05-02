@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
 
 
 
@@ -9,14 +10,42 @@ export function Formulario({agregarContacto}) {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [isEditing, setIsEditing] = useState(false);
-
+  const params = useParams();
+ 
 
   
+  
+  useEffect (() => {
+    if (params.id) {
+      fetch("https://assets.breatheco.de/apis/fake/contact/" + params.id)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error al obtener contacto");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setFullName(data.full_name);
+          setAddress(data.address);
+          setPhone(data.phone);
+          setEmail(data.email);
+          setIsEditing(true);
+        })
+        .catch((error) => console.error(error));
+    }
+  }, [params.id]);
 
 
-  const handleAddContact = () => {
-    fetch("https://assets.breatheco.de/apis/fake/contact/", {
-      method: "POST",
+
+
+  const handleAddContact = () => { 
+     
+    const url = isEditing ? "https://assets.breatheco.de/apis/fake/contact/" + params.id : "https://assets.breatheco.de/apis/fake/contact/";
+    const editarContacto = isEditing ? "PUT" : "POST";
+
+
+    fetch(url, {
+      method: editarContacto,
       headers: {
         "Content-Type": "application/json",
       },
@@ -42,9 +71,7 @@ export function Formulario({agregarContacto}) {
 
 
 
-
-
-  return (
+ return (
     <>
       <div className="form-container">
         <form onSubmit={(e) => e.prevent.default()}>
@@ -80,7 +107,7 @@ export function Formulario({agregarContacto}) {
           <div className="mb-3">
             <button onClick={handleAddContact} 
             type="submit" 
-            className="btn btn-primary">Enviar
+            className="btn btn-primary">{isEditing ? "Edit Contact" : "Add Contact"}
             </button>
           </div>
         </form>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 export const Home = () => {
@@ -56,7 +55,7 @@ export const Home = () => {
 						<div className="h4 mb-4 p-2 text-danger border-bottom border-danger mt-2"></div>
 						<div className="button-container">
 							<Link to= {`/formulario/${contact.id}`}>
-						<button className="btn1" onClick={() => handleEditContact(contact)}><i className="fas fa-pencil-alt"></i></button>
+						<button className="btn1" ><i className="fas fa-pencil-alt"></i></button>
 						    </Link>
 						<button className="btn2" onClick={() => handleDeleteContact(contact.id)}><i className="fas fa-trash-alt"></i></button>
 						</div>
