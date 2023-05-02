@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { Link, useParams } from "react-router-dom";
 
 
 
@@ -8,7 +8,10 @@ export function Formulario({agregarContacto}) {
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
 
+
+  
 
 
   const handleAddContact = () => {
@@ -36,6 +39,8 @@ export function Formulario({agregarContacto}) {
       })
       .catch((error) => console.log("error", error));
   };
+
+
 
 
 

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import { Link, useParams } from "react-router-dom";
 
 
 export const Home = () => {
 
 	const [contactos, setContactos] = useState([]);
-	const [editing, setEditing] = useState(false);
-    const [contactoEditando, setContactoEditando] = useState({});
-
+	
 	useEffect(()=> {
 		fetch("https://assets.breatheco.de/apis/fake/contact/agenda/agenda-sandra")
 		.then((response) => response.json())
@@ -33,8 +32,7 @@ export const Home = () => {
 
 	  
 	
-	
-	
+
 	return (
 	
 	<div className="container">
@@ -57,7 +55,9 @@ export const Home = () => {
 						</p>
 						<div className="h4 mb-4 p-2 text-danger border-bottom border-danger mt-2"></div>
 						<div className="button-container">
-						<button className="btn1"><i className="fas fa-pencil-alt"></i></button>
+							<Link to= {`/formulario/${contact.id}`}>
+						<button className="btn1" onClick={() => handleEditContact(contact)}><i className="fas fa-pencil-alt"></i></button>
+						    </Link>
 						<button className="btn2" onClick={() => handleDeleteContact(contact.id)}><i className="fas fa-trash-alt"></i></button>
 						</div>
                       </div>
@@ -66,8 +66,6 @@ export const Home = () => {
 				
 			))}
 		</div>
-          
-		
-	</div>
+    </div>
   );
 }
